@@ -45,3 +45,34 @@ public class Solution {
         return start.next;
     }
 }
+
+public class Solution2 {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if(m==n) return head;
+        ListNode start = new ListNode(0);
+        start.next = head;
+
+        ListNode walk = start;
+        ListNode preM = head;
+
+        for(int i=1; i<m; i++) {
+            walk = walk.next;
+        }
+        preM = walk;
+
+        ListNode prev = preM.next;
+        walk = prev.next;
+        ListNode post = walk.next;
+        for(int i=0; i<n-m; i++) {
+            walk.next = preM.next;
+            preM.next = walk;
+            prev.next = post;
+
+            walk = post;
+            if(post != null) post = post.next;
+        }
+
+        return start.next;
+    }
+}
+
